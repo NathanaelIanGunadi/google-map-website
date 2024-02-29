@@ -35,7 +35,6 @@ pymdown-extensions
 PySocks
 python-dateutil
 PyYAML
-pyyaml_env_tag
 requests
 six
 sniffio
@@ -43,7 +42,6 @@ sortedcontainers
 SQLAlchemy
 trio
 trio-websocket
-typing_extensions
 urllib3
 watchdog
 Werkzeug

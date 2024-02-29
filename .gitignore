@@ -1,0 +1,6 @@
+
+*.pyc
+*.db
+__pycache__/coordinate_finder.cpython-310.pyc
+*.pyc
+*.idea

@@ -1,2 +1,2 @@
 # Google Maps APIを使ったFlaskウェブアプリケーション
-## App.pyを実行してください
+## app.pyを実行してください

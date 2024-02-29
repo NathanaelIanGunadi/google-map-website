@@ -9,5 +9,6 @@
 /app.pyのindex()関数  
 ```
 
-instanceフォルダーにはSQLデータベースが入っている。DB browser for SQL Liteというアプリで中身が見える。
-.gitignore, README.md, requirements.txtは無視していい
+instanceフォルダーにはSQLデータベースが入っている。DB browser for SQL Liteというアプリで中身が見える  
+htmlファイルはJinjaというテンプレート技術で書かれている  
+.gitignore, README.md, requirements.txtは無視していい  

@@ -8,4 +8,4 @@
 /source/scraper.py # 場所の位置からGoogleAPIを利用してその場所に関する情報を取得するためのコード  
 /app.pyのindex()関数
 ```
-.gitignore, README.mdは無視していい
+.gitignore, README.md, requirements.txtは無視していい

@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Google Map Scraper</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap');
+</style>
+{% endblock %}
+
+{% block body %}
+
+{% if scroll %}
+    <script>
+        document.location.hash = '#' + '{{ scroll }}';
+    </script>
+{% endif %}
+<script>
+    const confirmActionDeleteUser = () => {
+        const response = confirm("アカウントを削除しますか？");
+
+        if (response) {
+            document.location='{{ url_for('delete_user') }}';
+        }
+    }
+
+    const confirmActionDeleteData = () => {
+        const response = confirm("テーブルのデータを削除しますか?\nロックされた項目は削除されません。");
+
+        if (response) {
+            return true;
+        }
+        return false;
+    }
+</script>
+
+<div class="content">
+
+    {% if user %}
+    <div class="username">
+        <h3>{{ user }}</h3>
+    </div>
+    {% endif %}
+
+    <div class="title">
+        <h1>Google Maps Scraper</h1>
+    </div>
+
+    {% if error %}
+    <div class="error">
+        <p>{{ error }}</p>
+    </div>
+    {% endif %}
+
+    <div class="form">
+        <form action="/" method="POST">
+            <div class="main_input">
+                <h3>　　場所：</h3>
+                {% if prev_loc %}
+                    <input type="text" name="location" id="location" value="{{prev_loc}}" placeholder="場所名">
+                {% else %}
+                    <input type="text" name="location" id="location" placeholder="場所名">
+                {% endif %}
+            </div>
+            <div class="main_input">
+                <h3>検索範囲：</h3>
+                {% if prev_radius %}
+                    <input type="text" name="radius" id="radius" value="{{prev_radius}}" placeholder="メートル">
+                {% else %}
+                    <input type="text" name="radius" id="radius" placeholder="メートル">
+                {% endif %}
+            </div>
+            <div class="wrap-collapsible">
+                <input id="collapsible" class="toggle" type="checkbox">
+                <label for="collapsible" class="lbl-toggle">キーワード</label>
+                <div class="collapsible-content">
+                    <div class="content-inner">
+                        <label><input type="checkbox" name="keyword" value="restaurant" {% if session["restaurant"] %} checked {% endif %}> 飲食店</label>
+                        <label><input type="checkbox" name="keyword" value="bar" {% if session["bar"] %} checked {% endif %}> バー</label>
+                        <label><input type="checkbox" name="keyword" value="karaoke" {% if session["karaoke"] %} checked {% endif %}> カラオケ</label>
+                        <div class="other-key">
+                            <label>それ以外: <input type="text" name="keyword" placeholder="キーワード" value="{% if session['other'] %}{{session['other']}}{% endif %}"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="press-button">
+                <input type="submit" value="検索" onclick="document.body.style.cursor = 'wait'">
+            </div>
+        </form>
+
+        <div class="results"></div>
+            {% if results %}
+            <form action="/clear" method="POST">
+                <div id="scroll" style="margin:0; padding:0; width:100%; height: 3px;"></div>
+                <div class="view-table">
+                    <table>
+                        <tr>
+                            <th style="pointer-events: none">
+                                &#128274;
+                            </th>
+                            <th onclick="document.location='{{ url_for('sort', column='name', direction=session['last_direction']) }}'">
+                                店名
+                            </th>
+                            <th onclick="document.location='{{ url_for('sort', column='rating', direction=session['last_direction']) }}'">
+                                平均評価
+                            </th>
+                            <th onclick="document.location='{{ url_for('sort', column='price_level', direction=session['last_direction']) }}'">
+                                値段
+                            </th>
+                            <th onclick="document.location='{{ url_for('sort', column='user_ratings_total', direction=session['last_direction']) }}'">
+                                口コミの数
+                            </th>
+                            <th onclick="document.location='{{ url_for('sort', column='distance', direction=session['last_direction']) }}'">
+                                距離
+                            </th>
+                            <th onclick="document.location='{{ url_for('sort', column='vicinity', direction=session['last_direction']) }}'">
+                                住所
+                            </th>
+                            <th onclick="document.location='{{ url_for('sort', column='type_of_place', direction=session['last_direction']) }}'">
+                                キーワード
+                            </th>
+                        </tr>
+
+                        {% for name, info in results.items() %}
+                        <tr>
+                            <td><label><input type="checkbox" name="fav" value="{{name}}" {% if name in session['fav'] %} checked {% endif %}></label></td>
+                            <td><a target=”_blank” href="https://www.google.com/maps/search/{{'+'.join(name.split()) + '+' + '+'.join(info['vicinity'].replace('/', ' ').split())}}/@{{ (info['lat'])|string + '+' + info['lng']|string }}" style="text-decoration: underline;">{{ name }}</a></td>
+                            <td>{{ info['rating'] }}</td>
+                            <td>{{ info['price_level'] }}</td>
+                            <td>{{ info['user_ratings_total'] }}</td>
+                            <td>{{ info['distance']|string + "km (" + info['origin'] + "から)"}}</td>
+                            <td>{{ info['vicinity'] }}</td>
+                            <td>{{ info['type_of_place'] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+
+
+
+                <div class="wrap-collapsible">
+                    <input id="collapsible2" class="toggle" type="checkbox">
+                    <label for="collapsible2" class="lbl-toggle">マップ</label>
+                    <div class="collapsible-content">
+                        <div class="content-inner">
+                            <div class="map">
+                                {{ googlemap(map_name, lat=map_lat, lng=map_lng, markers=map_markers,
+                                style="height:500px;width:auto;margin:0;", zoom=17) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="press-button">
+                    <input type='submit' value='データを削除' name='clear' onclick='return confirmActionDeleteData()'>
+                </div>
+
+
+
+            </form>
+            {% endif %}
+        </div>
+        <div class="delete-button" onclick="confirmActionDeleteUser()">
+            <p>アカウントを削除</p>
+        </div>
+        <div class="logout-button" onclick="document.location='{{ url_for('logout') }}'">
+            <p>ログアウト</p>
+        </div>
+        <div class="info">
+            <p>&#128712; 検索ボタンが押された度に最大38箇所しか検索されません。</p>
+        </div>
+</div>
+{% endblock %}

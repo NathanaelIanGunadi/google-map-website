@@ -1,0 +1,574 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans JP', "Gill Sans MT", sans-serif, "Hiragino Kaku Gothic ProN", Meiryo, "Roboto";
+    background-color: #FFFFFF;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 10vw;
+}
+
+.content {
+    align-items: center;
+    justify-content: center;
+}
+
+a, h1, h2, h3, p, input{
+    transition: 0.3s ease;
+}
+
+a {
+    text-decoration: none;
+    color: #202020;
+}
+
+.maps {
+    z-index: 2;
+}
+
+.title {
+    display: block;
+    background-color: #FFFFFF;
+    width: 100%;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    color: #202020;
+}
+
+.title-login {
+    display: block;
+    background-color: #FFFFFF;
+    width: 100%;
+    margin-bottom: 25px;
+    padding: 0px;
+    color: #202020;
+}
+
+.username {
+    position: absolute;
+    top: 2px;
+    left: 20px;
+    font-size: 14px;
+}
+
+.main_input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.main_input input {
+    width: 250px;
+    height: 36px;
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 1px 6px;
+    background-color: #fff3e3;
+    color: black;
+    border: none;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    padding: 0;
+}
+
+table, td, th {
+    border: 1px solid #202020;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 0;
+    border-color: black;
+}
+
+td {
+    padding: 12px 8px;
+    max-width:20vw;
+}
+
+th {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.5s ease;
+    color: #FFFFFF;
+    background-color: #3F3F3F;
+    position: sticky;
+    top: 0;
+    margin: 0;
+    box-shadow: inset 0 -2px 0 #000000;
+    z-index: 2;
+}
+
+th:hover {
+    background-color: #FFD06C;
+    transition: 0.5s ease;
+}
+
+.view-table {
+    align-items: center;
+    justify-content: center;
+    margin: 45px;
+    padding: 0;
+    max-height: 82vh;
+    overflow-y: auto;
+    box-shadow: inset 0 2px 0 #000000, inset 0 -2px 0 #000000;
+    border-left: solid;
+    border-right: solid;
+    border-width: 2px;
+    margin-bottom: 100px;
+}
+
+.map {
+    margin: 20px;
+}
+
+.results {
+    display: block;
+}
+
+.wrap-collapsible {
+    margin: 40px 45px;
+    font-size: 20px;
+}
+
+#collapsible {
+    display: none;
+}
+
+#collapsible2 {
+    display: none;
+}
+
+.lbl-toggle {
+    display: block;
+
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 24px;
+    text-transform: uppercase;
+    text-align: center;
+
+    padding: 1rem;
+
+    color: #202020;
+    background: #FFD06C;
+
+    cursor: pointer;
+
+    border-radius: 7px;
+    transition: all 0.25s ease-out;
+}
+
+.lbl-toggle:hover {
+    color: #707070;
+}
+
+.lbl-toggle::before {
+    content: ' ';
+    display: inline-block;
+
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid currentColor;
+    vertical-align: middle;
+    margin-right: .7rem;
+    transform: translateY(-2px);
+
+    transition: transform .2s ease-out;
+}
+
+.toggle:checked + .lbl-toggle::before {
+    transform: rotate(90deg) translateX(-3px);
+}
+
+.collapsible-content {
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height .25s ease-in-out;
+    background: #FFFFFF; /* White */
+}
+
+.toggle:checked + .lbl-toggle + .collapsible-content {
+    max-height: 200vh;
+}
+
+.toggle:checked + .lbl-toggle {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.collapsible-content .content-inner {
+    background: #fff1d8;
+    border-bottom: 1px solid #FFD06C;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    padding: .5rem .5rem;
+}
+
+.content-inner label {
+    font-size: 16px;
+}
+
+.map {
+    margin: 0;
+}
+
+.other-key {
+    margin: 10px;
+    font-size: 17px;
+}
+
+.other-key input {
+    width: 200px;
+    height: 24px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: black;
+}
+
+.press-button {
+    margin-bottom: 30px;
+    align-items:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.press-button input {
+    width: 140px;
+    height: 36px;
+    font-size: 14px;
+    border-radius: 7px;
+    background-color: #FFD06C;
+    transition: 0.3s ease;
+    color: black;
+    border: none;
+    text-decoration:none;
+}
+
+.press-button p {
+    width: 140px;
+    height: 36px;
+    position: relative;
+    font-size: 14px;
+    border-radius: 7px;
+    background-color: #FFD06C;
+    transition: 0.3s ease;
+    color: black;
+    border: none;
+    display: block;
+    display: flex; /* changed from block to flex */
+    justify-content: center; /* added this line */
+    align-items: center; /* added this line */
+    margin:0;
+}
+
+.press-button input:hover {
+    background-color: #ffb802;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.press-button p:hover {
+    background-color: #ffb802;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.logout-in {
+    position: relative;
+    top: 35px;
+    right: 20px;
+    background-color: #202020;
+    padding: 3px 6px;
+    border-radius: 4px;
+    color: #FFFFFF;
+    transition: 0.4s ease;
+    font-size: 12px;
+    margin: 2px;
+}
+
+.logout-in p {
+    margin: 2px;
+}
+
+.logout-in:hover {
+    background-color: #FFD06C;
+    transition: 0.4s ease;
+    cursor: pointer;
+}
+
+
+.logout-button {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background-color: #202020;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: #FFFFFF;
+    transition: 0.4s ease;
+    font-size: 14px;
+}
+
+.logout-button p {
+    margin: 2px;
+}
+
+.logout-button:hover {
+    background-color: #FFD06C;
+    transition: 0.4s ease;
+    cursor: pointer;
+}
+
+.delete-button {
+    position: relative;
+    background-color: #202020;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: #FFFFFF;
+    transition: 0.4s ease;
+    font-size: 14px;
+    width:120px;
+    display: inline-block;
+    margin:0px;
+}
+
+.delete-button p {
+    margin: 2px;
+}
+
+.delete-button:hover {
+    background-color: red;
+    transition: 0.4s ease;
+    cursor: pointer;
+}
+
+.info {
+    z-index: 3;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: #FFD06C;
+    padding: 6px 10px;
+}
+
+.info p {
+    margin: 0;
+}
+
+.login-main {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 8vh 4vw;
+    padding: 0;
+}
+
+.login-half-one {
+    justify-content: center;
+    width: 50%;
+    padding: 0 2vw;
+    margin: 80px 0;
+    min-width: 310px;
+}
+
+.login-half-two {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    padding: 0 2vw;
+    background-color: #FFD06C;
+    background: linear-gradient(90deg, rgba(255, 208, 108, 1) 37%, rgba(255, 195, 70, 1) 62%);
+}
+
+.login_input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.login_input input {
+    width: 200px;
+    height: 32px;
+    border-radius: 3px;
+    font-size: 13px;
+    padding: 1px 6px;
+    background-color: #fff3e3;
+    color: black;
+    border: none;
+}
+
+.login-button {
+    padding: 0;
+}
+
+.login-button input {
+    width: auto;
+    height: 30px;
+    font-size: 14px;
+    border-radius: 3px;
+    background-color: #FFD06C;
+    transition: 0.3s ease;
+    color: black;
+    border-style: none;
+    padding: 0 10px;
+}
+
+.login-button input:hover {
+    background-color: #ffb802;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.error {
+    color:red;
+    font-size: 14px;
+}
+
+@media screen and (max-height: 400px) {
+    th {
+        font-size: 12px;
+        padding: 5px 6px;
+    }
+    td {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .title + .title-login {
+        margin-top: 10px;
+    }
+
+    .title-login {
+        font-size: 18px;
+        margin-bottom: 18px;
+    }
+
+    .title-login h1 {
+        font-size: 20px;
+    }
+
+    .title h1 {
+        font-size: 20px;
+    }
+
+    .main_input input {
+        font-size: 12px;
+        width: 180px;
+        height: 24px;
+    }
+
+    .main_input {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 12px;
+    }
+
+    .login_input input {
+        font-size: 12px;
+        width: 120px;
+        height: 20px;
+    }
+
+    table, td, th {
+        font-size: 10px;
+    }
+
+    th {
+        padding: 8px 12px;
+    }
+
+    .wrap-collapsible {
+        margin: 30px 20px;
+        font-size: 16px;
+    }
+
+    .wrap-collapsible label {
+        font-size: 16px;
+    }
+
+    .content-inner label {
+        font-size: 14px;
+    }
+
+    .logout-button {
+        top: 10px;
+        font-size: 9.5px;
+        padding: 3px 6px;
+    }
+
+    .delete-button {
+        font-size: 10px;
+        padding: 3px 6px;
+        width: 100px;
+    }
+
+    .username {
+        font-size: 9.5px;
+    }
+
+    .press-button input {
+        width: 120px;
+        height: 30px;
+        font-size: 12px;
+    }
+    .press-button p {
+        width: 120px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .view-table {
+        overflow-x: auto;
+        margin: 30px;
+        margin-bottom: 45px;
+    }
+
+    .info {
+        font-size: 11px;
+    }
+
+    .login-half-one {
+        min-width: 200px;
+    }
+
+    .login-button input {
+        width: auto;
+        height: 20px;
+        font-size: 11px;
+        padding: 0 6px;
+    }
+
+    .login-half-two {
+        background: linear-gradient(90deg, rgba(255, 208, 108, 1) 19%, rgba(255, 193, 65, 1) 87%);
+    }
+
+    .error {
+        color:red;
+        font-size: 11px;
+    }
+
+    .other-key input {
+        width: 120px;
+        height: 20px;
+        font-size:12px;
+        border-radius: 4px;
+        background-color: #ffffff;
+        color: black;
+    }
+}
+

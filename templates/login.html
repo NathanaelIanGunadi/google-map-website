@@ -1,45 +1,48 @@
-{% extends 'base.html' %}
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
 
-{% block head %}
-<title>Login</title>
-{% endblock %}
-{% block body %}
-<div class="login-main">
-    <div class="login-half-one">
-        <div class="title-login">
-            <h1 style="margin:0;">&#129517;</h1>
-        </div>
-
-        {% if msg %}
-            <p class="error">{{msg}}</p>
-        {% endif %}
-        <form method="POST">
-
-            <div class="login_input">
-                <div>
-                    <input type="text" name="username" style="margin-bottom:10px;" placeholder="👤 ユーザー名" required>
-                    <br>
-                    <input type="password" name="password" style="margin-bottom:10px;" placeholder="&#128273; パスワード" required>
-                    <br>
-                    <div style="margin-top:10px;" class="login-button">
-                        <input type="submit" value="アカウント作成・ログイン">
-                    </div>
-                </div>
+<body>
+    <div class="login-main">
+        <div class="login-half-one">
+            <div class="title-login">
+                <h1 style="margin:0;">&#129517;</h1>
             </div>
 
-        </form>
+            {% if msg %}
+                <p class="error">{{msg}}</p>
+            {% endif %}
+            <form method="POST">
+
+                <div class="login_input">
+                    <div>
+                        <input type="text" name="username" style="margin-bottom:10px;" placeholder="👤 ユーザー名" required>
+                        <br>
+                        <input type="password" name="password" style="margin-bottom:10px;" placeholder="&#128273; パスワード" required>
+                        <br>
+                        <div style="margin-top:10px;" class="login-button">
+                            <input type="submit" value="アカウント作成・ログイン">
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="login-half-two">
+            <h1 class="title-login" style="color:white; background-color: rgba(0, 0, 0, 0); text-align:center;">Google Maps Scraper</h1>
+        </div>
     </div>
-    <div class="login-half-two">
-        <h1 class="title-login" style="color:white; background-color: rgba(0, 0, 0, 0); text-align:center;">Google Maps Scraper</h1>
-    </div>
-</div>
 
 
-<div class="info" style="position: fixed;bottom: 0;width: 100%;">
-    <p>&#128712; パスワードは
-        <a href="https://medium-company.com/bcrypt/#:~:text=bcrypt%E3%81%A8%E3%81%AF%E3%80%81Blowfish%E6%9A%97%E5%8F%B7,%E5%80%A4%E3%81%A7%E4%BF%9D%E7%AE%A1%E3%81%97%E3%81%BE%E3%81%99%E3%80%82" style="text-decoration: underline;">
-            BCrypt</a>
-        によりハッシュ化されます。</p>
-</div>
-{% endblock %}
+    <div class="info" style="position: fixed;bottom: 0;width: 100%;">
+        <p>&#128712; パスワードは
+            <a href="https://medium-company.com/bcrypt/#:~:text=bcrypt%E3%81%A8%E3%81%AF%E3%80%81Blowfish%E6%9A%97%E5%8F%B7,%E5%80%A4%E3%81%A7%E4%BF%9D%E7%AE%A1%E3%81%97%E3%81%BE%E3%81%99%E3%80%82" style="text-decoration: underline;">
+                BCrypt</a>
+            によりハッシュ化されます。</p>
+    </div>
+</body>
 
